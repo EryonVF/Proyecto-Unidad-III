@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <a class="navbar-brand" href="#">XTREMETEPC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -144,7 +144,7 @@
                 const productColumn = document.createElement("div");
                 productColumn.className = "col-md-4 col-sm-6 col-12 product-admin";
                 productColumn.innerHTML = `<div class="border p-3 mb-4">
-                    <p>ID: ${product.id}</p>
+                    <p>Codigo: ${product.id}</p>
                     <p>Nombre: ${product.name}</p>
                     <p>Precio: $${product.price}</p>
                     <img src="${product.image}" alt="Imagen del producto" class="product-image-admin">

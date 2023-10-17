@@ -7,7 +7,7 @@
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <a class="navbar-brand" href="#">XTREMETEPC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,41 +42,29 @@
     </div>
     
 
-    <div class="row">
-        <div class="col-md-8">
-            <h3>Resumen de Compra</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody id="resumenCompra">
-                    <!-- Los detalles de la compra se generarán dinámicamente con JavaScript -->
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3">Total:</td>
-                        <td id="total"></td>
-                    </tr>
-                </tfoot>
-            </table>
-            <button class="btn btn-primary" id="botonComprar">Comprar</button>
-        </div>
+    <div class="col-md-8">
+        <h3>Resumen de Compra</h3>
+        <table class="table table-striped" style="background-color: #ffd4d4; border-radius: 15px;">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="resumenCompra">
+                <!-- Los detalles de la compra se generarán dinámicamente con JavaScript -->
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total:</td>
+                    <td id="total"></td>
+                </tr>
+            </tfoot>
+        </table>
+        <button class="btn btn-primary" id="botonComprar" style="display: block; margin: 0 auto;">Confirmar Comprar</button>
     </div>
-
-    <!-- Pie de página  -->
-    <footer class="text-muted py-5">
-        <div class="container">
-            <p class="float-end mb-1">
-                <a href="#">Volver arriba</a>
-            </p>
-            <p class="mb-1">Catalogo de Productos &copy; 2023</p>
-            <p class="mb-0">¿Necesitas ayuda? <a href="#">Contáctanos</a></p>
-        </div>
     </footer>
 
 
@@ -160,7 +148,7 @@ if (userRole === "admin") {
                             <img src="${product.image}" alt="Imagen del producto">
                         </div>
                         <div class="product-details">
-                            <p>ID: ${product.id}</p>
+                            <p>Codigo: ${product.id}</p>
                             <p>Nombre: ${product.name}</p>
                             <p>Precio: $${product.price}</p>
                         </div>
@@ -168,14 +156,14 @@ if (userRole === "admin") {
                             <button class="btn btn-outline-secondary" onclick="decrementQuantity('quantity-${product.id}')">-</button>
                             <input type="number" id="quantity-${product.id}" class="quantity-input" value="1">
                             <button class="btn btn-outline-secondary" onclick="incrementQuantity('quantity-${product.id}')">+</button>
-                            <button class="btn btn-success" onclick="addToCart(${product.id}, parseInt(document.getElementById('quantity-${product.id}').value))">Comprar</button>
+                            <button class="btn btn-success" onclick="addToCart(${product.id}, parseInt(document.getElementById('quantity-${product.id}').value))">Añadir al carrito</button>
                         </div>
                     </div>`;
                 productContainer.appendChild(productColumn);
             });
         }
 
-        // Funciones para incrementar y decrementar la cantidad
+        // incrementar y decrementar la cantidad
         function incrementQuantity(elementId) {
             const quantityInput = document.getElementById(elementId);
             quantityInput.value = parseInt(quantityInput.value) + 1;
@@ -193,6 +181,7 @@ if (userRole === "admin") {
         // Crea una ventana emergente
         const nuevaVentana = window.open("", "Ticket de Compra", "width=500,height=500");
 
+        
         // Crea el contenido del ticket de compra en la ventana emergente
         let ticketContenido = `
             <!DOCTYPE html>
@@ -208,7 +197,7 @@ if (userRole === "admin") {
         max-width: 400px;
         margin: 0 auto;
         padding: 20px;
-        border: 2px solid #333;
+        border: 2px solid #ffd4d4;
         font-family: Arial, sans-serif;
     }
 
@@ -224,7 +213,7 @@ if (userRole === "admin") {
     }
 
     th, td {
-        border: 1px solid #333;
+        border: 1px solid #ffd4d4;
         padding: 8px;
     }
 
