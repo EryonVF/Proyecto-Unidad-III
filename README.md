@@ -14,5 +14,5 @@ Funcionalidades y características.
 
 - **Calculos de la tienda:** La página de tienda (shop.html) permite a los usuarios agregar productos al carrito de compra, ajustar la cantidad y mostrar un resumen de la compra. También se incluye la opción de habilitar o deshabilitar una calculadora en la misma página. JavaScript se utiliza para realizar cálculos y actualizar el resumen de compra.
 
-- **"uniformidad de páginas:** Se define una estructura de página común que incluye encabezado, contenido y pie de página. CSS y Bootstrap se utilizan para aplicar estilos consistentes a todas las páginas y asegurarse de que sean responsivas para diferentes tamaños de dispositivos.
+- **"Uniformidad de páginas:** Se define una estructura de página común que incluye encabezado, contenido y pie de página. CSS y Bootstrap se utilizan para aplicar estilos consistentes a todas las páginas y asegurarse de que sean responsivas para diferentes tamaños de dispositivos.
 
