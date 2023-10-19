@@ -2,13 +2,63 @@
 <html>
 <head>
     <title>Tienda</title>
+    <!-- Dependencias de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Estilos personalizados -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+
+    <!-- Modal de la Calculadora -->
+    <div id="calculadoraModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Calculadora</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenido de la calculadora -->
+                    <h1>Calculadora</h1>
+                    
+                    <div id="calculator">
+                        <input type="text" id="display" readonly>
+                        <div id="buttons">
+                            <!-- Botones de la calculadora -->
+                            <button class="number">1</button>
+                            <button class="number">2</button>
+                            <button class="number">3</button>
+                            <button class="operator">+</button>
+                            <button class="number">4</button>
+                            <button class="number">5</button>
+                            <button class="number">6</button>
+                            <button class="operator">-</button>
+                            <button class="number">7</button>
+                            <button class="number">8</button>
+                            <button class="number">9</button>
+                            <button class="operator">*</button>
+                            <button class="operator">/</button>
+                            <button class="number">0</button>
+                            <button class="clear">C</button>
+                            <button class="equals">=</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-        <a class="navbar-brand" href="#">XTREMETEPC</a>
+        <a class="nav-link" href="#">XTREMETEPC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,11 +76,16 @@
                 <li class="nav-item">
                     <button class="btn btn-light" onclick="logout()">Cerrar Sesión</button>
                 </li>
+                <!-- Botón "Calculadora" que abre el modal de la calculadora -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="calculadoraButton" data-toggle="modal" data-target="#calculadoraModal">Calculadora</a>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <div class="jumbotron ">
+
+    <div class=" ">
         <img src="https://www.xtremetecpc.com/images/media/2022/11/armarpc2.png" class="banner" alt="Imagen del banner">
     </div>
    
@@ -287,8 +342,10 @@ if (userRole === "admin") {
         // Actualiza la lista de productos disponibles al cargar la página
         updateProductList();
         updateCartContent();
-    </script>
 
+
+    </script>
+    <script src="calculadora.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

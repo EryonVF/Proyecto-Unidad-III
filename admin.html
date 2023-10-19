@@ -6,6 +6,23 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+
+    <script>
+        // Función para verificar si el usuario ha iniciado sesión
+        function checkUserLogin() {
+            const userRole = localStorage.getItem("userRole");
+            if (userRole !== "admin") {
+                // Redirige al usuario a la página de inicio de sesión si no ha iniciado sesión
+                window.location.href = "login.html";
+            }
+        }
+
+        // Llama a la función de verificación al cargar la página
+        checkUserLogin();
+    </script>
+
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <a class="navbar-brand" href="#">XTREMETEPC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +47,7 @@
     </nav>
 
     <div class="container my-4">
-        <div class="jumbotron text-center">
+        <div class=" text-center">
             <div style="background-color: #f00000; display: inline-block; padding: 10px;">
                 <img src="https://www.xtremetecpc.com/images/media/2022/11/armarpc2.png" class="banner" alt="Imagen del banner">
             </div>
