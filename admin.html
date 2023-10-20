@@ -54,8 +54,6 @@
         </div>
     </div>
     
-    
-
 
         
     <div class="container">
@@ -84,7 +82,7 @@
         </div>
 
         <!-- Lista de productos existentes en columnas -->
-        <div class="col-md-6">
+        <div class="col-md-9">
             <h2 class="mb-4">Productos Existentes</h2>
             <div class="row" id="productList">
                 <!-- La lista de productos se generará aquí -->
@@ -94,6 +92,7 @@
 </div>
 
     <script>
+        
         function logout() {
             localStorage.removeItem("userRole");
             window.location.href = "login.html"; // Redirige al usuario a la página de inicio de sesión
@@ -143,6 +142,14 @@
         // Inicializar la variable "products" desde el almacenamiento local
         let products = JSON.parse(localStorage.getItem('products')) || [];
         let nextProductId = products.length + 1;
+
+
+
+        // producto de prueba
+        products.push({ id: nextProductId, name: 'Mouse', price: 50, image:'Mouse.png' });
+        nextProductId++;
+
+
 
         // Función para agregar un producto
         function addProduct(productName, productPrice, productImage) {

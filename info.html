@@ -24,6 +24,21 @@
 </head>
 
 <body>
+    <script>
+        // Función para verificar si el usuario ha iniciado sesión
+        function checkUserLogin() {
+            const userRole = localStorage.getItem("userRole");
+            if (userRole !== "admin") {
+                // Redirige al usuario a la página de inicio de sesión si no ha iniciado sesión
+                window.location.href = "login.html";
+            }
+        }
+
+        // Llama a la función de verificación al cargar la página
+        checkUserLogin();
+    </script>
+
+
 
     <div class="container">
         <div class="info-card">

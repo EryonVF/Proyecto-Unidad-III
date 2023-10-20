@@ -10,7 +10,96 @@
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body>.
+
+    <script>
+        // Función para verificar si el usuario ha iniciado sesión
+        function checkUserLogin() {
+            const userRole = localStorage.getItem("userRole");
+            if (userRole !== "admin") {
+                // Redirige al usuario a la página de inicio de sesión si no ha iniciado sesión
+                window.location.href = "login.html";
+            }
+        }
+
+        // Llama a la función de verificación al cargar la página
+        checkUserLogin();
+    </script>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <a class="navbar-brand" href="#">XTREMETEPC</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.html" id="adminContent" style="display: none">Catálogo de Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="shop.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="info.html">Acerca de</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="calculadoraButton" data-toggle="modal" data-target="#calculadoraModal">Calculadora</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-light" onclick="logout()">Cerrar Sesión</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <img src="https://www.xtremetecpc.com/images/media/2022/11/armarpc2.png" class="img-fluid mt-4" alt="Imagen del banner">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+                <h1>Tienda</h1>
+                <div class="row" id="productContainer">
+                    <!-- Los productos disponibles se listarán en columnas aquí -->
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-12 col-md-12">
+                <h3>Resumen de Compra</h3>
+                <table class="table table-striped" style="background-color: #ffd4d4; border-radius: 15px;">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resumenCompra">
+                        <!-- Los detalles de la compra se generarán dinámicamente con JavaScript -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Total:</td>
+                            <td id="total"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <button class="btn btn-primary" id="botonComprar" style="display: block; margin: 0 auto;">Confirmar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    
 
     <!-- Modal de la Calculadora -->
     <div id="calculadoraModal" class="modal fade" tabindex="-1" role="dialog">
@@ -56,73 +145,85 @@
         </div>
     </div>
 
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-        <a class="nav-link" href="#">XTREMETEPC</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="admin.html" id="adminContent" style="display: none">Catálogo de Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="shop.html">Tienda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="info.html">Acerca de</a>
-                </li>
-                <li class="nav-item">
-                    <button class="btn btn-light" onclick="logout()">Cerrar Sesión</button>
-                </li>
-                <!-- Botón "Calculadora" que abre el modal de la calculadora -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="calculadoraButton" data-toggle="modal" data-target="#calculadoraModal">Calculadora</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+ <!-- scrip de la calculadora -->
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const display = document.getElementById("display");
+    const buttons = document.getElementById("buttons");
+
+    let firstValue = null;
+    let currentOperator = null;
+    let shouldClearDisplay = false;
+
+    // Función para manejar los números y operadores
+    function handleInput(input) {
+        if (input === "=") {
+            // Calcular el resultado cuando se presiona "="
+            if (firstValue !== null && currentOperator !== null) {
+                const num2 = parseFloat(display.value);
+                const result = calculate(firstValue, num2, currentOperator);
+                display.value = result;
+                firstValue = result;
+                currentOperator = null;
+            }
+        } else if (input === "C") {
+            // Limpiar el display cuando se presiona "C"
+            display.value = "";
+            firstValue = null;
+            currentOperator = null;
+        } else if (["+", "-", "*", "/"].includes(input)) {
+            // Manejar operadores
+            if (firstValue === null) {
+                firstValue = parseFloat(display.value);
+            } else if (currentOperator !== null) {
+                const num2 = parseFloat(display.value);
+                firstValue = calculate(firstValue, num2, currentOperator);
+            }
+            currentOperator = input;
+            shouldClearDisplay = true;
+        } else {
+            // Manejar números
+            if (shouldClearDisplay) {
+                display.value = "";
+                shouldClearDisplay = false;
+            }
+            display.value += input;
+        }
+    }
+
+    // Función para calcular el resultado
+    function calculate(num1, num2, operator) {
+        switch (operator) {
+            case "+":
+                return num1 + num2;
+            case "-":
+                return num1 - num2;
+            case "*":
+                return num1 * num2;
+            case "/":
+                if (num2 !== 0) {
+                    return num1 / num2;
+                } else {
+                    return "Error";
+                }
+            default:
+                return num2;
+        }
+    }
+
+    // Agregar event listener para botones
+    buttons.addEventListener("click", function (event) {
+        if (event.target.tagName === "BUTTON") {
+            const input = event.target.innerText;
+            handleInput(input);
+        }
+    });
+});
+
+    </script>
 
 
-    <div class=" ">
-        <img src="https://www.xtremetecpc.com/images/media/2022/11/armarpc2.png" class="banner" alt="Imagen del banner">
-    </div>
-   
-    
-        <h1 class="mt-4">Tienda</h1>
-        <div class="mt-4 row" id="productContainer">
-            <!-- Los productos disponibles se listarán en columnas aquí -->
-        </div>
-    </div>
-    
-
-    <div class="col-md-8">
-        <h3>Resumen de Compra</h3>
-        <table class="table table-striped" style="background-color: #ffd4d4; border-radius: 15px;">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody id="resumenCompra">
-                <!-- Los detalles de la compra se generarán dinámicamente con JavaScript -->
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3">Total:</td>
-                    <td id="total"></td>
-                </tr>
-            </tfoot>
-        </table>
-        <button class="btn btn-primary" id="botonComprar" style="display: block; margin: 0 auto;">Confirmar Comprar</button>
-    </div>
-    </footer>
-
-
+ <!-- scrip para que admin de alta productos -->
     <script>
 const userRole = localStorage.getItem("userRole");
 
@@ -189,8 +290,6 @@ if (userRole === "admin") {
     // Actualiza el total
     total.textContent = `$${subtotalTotal}`;
 }
-
-
         function updateProductList() {
             const productContainer = document.getElementById("productContainer");
             productContainer.innerHTML = "";
@@ -345,7 +444,6 @@ if (userRole === "admin") {
 
 
     </script>
-    <script src="calculadora.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
